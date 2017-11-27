@@ -1,0 +1,47 @@
+<blockquote class="blockquote">
+    <p class="mb-0">ชื่อ: {{dataSelf.Fname}} {{dataSelf.Lname}}</p>
+    <footer class="blockquote-footer">
+        <cite title="รหัส">รหัส: {{dataSelf.IDcode}}</cite>
+
+    </footer>
+    <footer class="blockquote-footer">
+        <cite title="เลขที่">เลขที่: {{dataSelf.StdNum}}</cite>
+    </footer>
+    <footer class="blockquote-footer">
+        <cite title="ชั้นปี">ชั้นปี: {{dataSelf.Class}} </cite>
+    </footer>
+</blockquote>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group has-success">
+            <label for="inpDeposit">ฝาก</label>
+            <input type="number" class="form-control form-control-lg bg-primary text-white" onClick="this.select()" name="inpDeposit" id="inpDeposit" [(ngModel)]="list.deposit" placeholder="จำนวนเงิน">
+
+        </div>
+        <div class="form-group">
+            <label for="inpWithDrawn">ถอน</label>
+            <input type="number" class="form-control form-control-lg bg-danger text-white" onClick="this.select()" name="inpWithDrawn" id="inpWithDrawn" [(ngModel)]="list.withDrawn" placeholder="จำนวนเงิน">
+        </div>
+        <button type="button" class="btn btn-primary btn-lg pull-right" (click)="sentData(list)">ตกลง</button>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>วันที่</th>
+                    <th>ฝาก</th>
+                    <th>ถอน</th>
+                    <th>ลบ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of dataRepeat">
+                    <td>{{data.Created}}</td>
+                    <td>{{data.deposit_amount | currency:"THB"}}</td>
+                    <td>{{data.withdrawn_amount | currency:"THB"}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<kendo-grid [data]="dataRepeat" [height]="410">
+    <kendo-grid-column field="IDcode" title="รหัส"></kendo-grid-column>
+    <kendo-grid-column field="Fname" title="ชื่อ"></kendo-grid-column>
+    <kendo-grid-column field="Lname" title="นามสกุล"></kendo-grid-column>
+    <kendo-grid-column field="StdNum" title="เลขที่"></kendo-grid-column>
+    <kendo-grid-column field="Class" title="ชั้น"></kendo-grid-column>
+    <kendo-grid-column field="Tools" title="Tools" width="120">
+        <ng-template kendoGridCellTemplate let-IDcode>
+            <button [routerLink]="IDcode.IDcode" kendoButton [primary]="true">
+                        ทำรายการ
+                        </button>
+        </ng-template>
+    </kendo-grid-column>
+</kendo-grid>

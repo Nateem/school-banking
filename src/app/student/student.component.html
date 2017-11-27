@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-default">
+            <div class="card-body">
+                <div class="alert alert-{{notify.type}} alert-dismissible fade" [ngClass]="{'show': notify.show}" role="alert">
+                    <strong>{{notify.type}}</strong> {{notify.MSG}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                </div>
+                <form #FormData>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <kendo-textbox-container floatingLabel="รหัสประจำตัว">
+                                    <input type="text" name="inpIDcode" id="inpIDcode" [(ngModel)]="student.IDcode" kendoTextBox>
+                                </kendo-textbox-container>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <kendo-textbox-container floatingLabel="ชื่อ">
+                                    <input type="text" name="inpFName" id="inpFName" [(ngModel)]="student.Fname" kendoTextBox>
+                                </kendo-textbox-container>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <kendo-textbox-container floatingLabel="นามสกุล">
+                                    <input type="text" name="inpLName" id="inpLName" [(ngModel)]="student.Lname" kendoTextBox>
+                                </kendo-textbox-container>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <p>เลขที่</p>
+                                <kendo-numerictextbox [min]="0" [max]="100" name="inpStdNum" id="inpStdNum" [(ngModel)]="student.StdNum">
+                                </kendo-numerictextbox>
+
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="inpClass">ชั้นปีที่</label>
+                                <select class="form-control" name="inpClass" id="inpClass" [(ngModel)]="student.Class" required>
+                                    <option value="" selected>-- เลือก --</option>
+                                    <option *ngFor="let c of [1,2,3,4,5,6]" [value]="c">{{c}}</option>
+                                
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-primary btn-outline" (click)="sendData(student,'ADD')">
+                               <i class="fa fa-save"></i> เพิ่ม
+                            </button>
+                            <button type="submit" class="btn btn-warning btn-outline" (click)="sendData(student,'EDIT')" *ngIf="student.ID">
+                                    <i class="fa fa-save"></i> แก้ไข
+                            </button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+        <div class="card  ">
+
+
+            <div class="card-body" kendoRippleContainer>
+
+                <kendo-grid [data]="stdRepeat" [height]="410">
+                    <kendo-grid-column field="ToolsEdit" title="แก้ไข" width="70" [locked]="true">
+                        <ng-template kendoGridCellTemplate let-ID>
+                            <button kendoButton [primary]="true" (click)="editData(ID.ID)">
+                                                            <i class="fa fa-pencil" aria-hidden="true"></i> แก้ไข
+                                                                </button>
+                        </ng-template>
+                    </kendo-grid-column>
+                    <kendo-grid-column field="IDcode" title="รหัสประจำตัว" width="120"></kendo-grid-column>
+                    <kendo-grid-column field="Fname" title="ชื่อ" width="120"></kendo-grid-column>
+                    <kendo-grid-column field="Lname" title="นามสกุล" width="120"></kendo-grid-column>
+                    <kendo-grid-column field="StdNum" title="เลขที่" width="120"></kendo-grid-column>
+                    <kendo-grid-column field="Class" title="ชั้น" width="120"></kendo-grid-column>
+                    <kendo-grid-column field="ToolsDelete" title="ลบ" width="70" [locked]="true">
+                        <ng-template kendoGridCellTemplate let-ID>
+                            <button kendoButton [primary]="true" (click)="deleteData(ID.ID)">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i> ลบ
+                                                        </button>
+                        </ng-template>
+                    </kendo-grid-column>
+                </kendo-grid>
+            </div>
+        </div>
+
+    </div>
